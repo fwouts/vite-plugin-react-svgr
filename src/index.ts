@@ -1,4 +1,5 @@
-import svgrCore from "@svgr/core";
+// @ts-ignore untyped
+import svgrTransform from "@svgr/core";
 import { transform } from "esbuild";
 import fs from "fs-extra";
 import path from "path";
@@ -25,12 +26,13 @@ export function svgr({
         const matchStart = path.join(path.sep, mapFrom);
         if (id.startsWith(matchStart)) {
           absoluteFilePath = path.join(mapTo, path.relative(matchStart, id));
+          break;
         }
       }
       let componentCode: string;
       if (await fs.pathExists(absoluteFilePath)) {
         const svg = await fs.readFile(absoluteFilePath, "utf8");
-        const generatedSvgrCode: string = await svgrCore.transform(
+        const generatedSvgrCode: string = await svgrTransform(
           svg,
           {},
           { componentName: "ReactComponent" }

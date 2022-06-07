@@ -10,7 +10,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@svgr/core": "^6.2.1",
+    "@svgr/core": "^5.5.0",
     "esbuild": "^0.14.42",
     "fs-extra": "^10.1.0"
   },
