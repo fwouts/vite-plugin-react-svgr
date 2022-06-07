@@ -1,8 +1,8 @@
 import svgrCore from "@svgr/core";
+import { transform } from "esbuild";
 import fs from "fs-extra";
 import path from "path";
-import type { Plugin } from "vite";
-import { transformWithEsbuild } from "vite";
+import type { Plugin } from "rollup";
 
 export function svgr({
   exportedComponentName,
@@ -48,12 +48,12 @@ export const ${exportedComponentName} = () => <div>
 </div>;
         `;
       }
-      const res = await transformWithEsbuild(
+      const res = await transform(
         (exportedComponentName !== "default" ? code : "") +
           "\n" +
           componentCode,
-        absoluteFilePath,
         {
+          sourcefile: absoluteFilePath,
           loader: "jsx",
         }
       );
