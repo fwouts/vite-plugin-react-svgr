@@ -6,10 +6,10 @@ import path from "path";
 import type { Plugin } from "rollup";
 
 export function svgr({
-  exportedComponentName,
+  exportAs,
   alias = {},
 }: {
-  exportedComponentName: string;
+  exportAs: string;
   alias?: Record<string, string>;
 }): Plugin {
   return {
@@ -39,7 +39,7 @@ export function svgr({
         );
         componentCode = generatedSvgrCode.replace(
           "export default ReactComponent",
-          `export { ReactComponent as ${exportedComponentName} }`
+          `export { ReactComponent as ${exportAs} }`
         );
       } else {
         componentCode = `
@@ -49,13 +49,11 @@ const ReactComponent = () => <div>
   Unable to resolve ${id}
 </div>;
 
-export { ReactComponent as ${exportedComponentName} }
+export { ReactComponent as ${exportAs} }
         `;
       }
       const res = await transform(
-        (exportedComponentName !== "default" ? code : "") +
-          "\n" +
-          componentCode,
+        (exportAs !== "default" ? code : "") + "\n" + componentCode,
         {
           sourcefile: absoluteFilePath,
           loader: "jsx",

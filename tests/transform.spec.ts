@@ -8,7 +8,7 @@ describe("plugin transform", () => {
   it("supports custom component name", async () => {
     expect(
       await invokeTransform({
-        exportedComponentName: "SvgComponent",
+        exportAs: "SvgComponent",
       })
     ).toMatchInlineSnapshot(`
       {
@@ -39,7 +39,7 @@ describe("plugin transform", () => {
   it("supports component name set to 'default'", async () => {
     expect(
       await invokeTransform({
-        exportedComponentName: "default",
+        exportAs: "default",
       })
     ).toMatchInlineSnapshot(`
       {
