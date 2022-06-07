@@ -43,9 +43,11 @@ export function svgr({
         componentCode = `
 import React from 'react';
 
-export const ${exportedComponentName} = () => <div>
+const ReactComponent = () => <div>
   Unable to resolve ${id}
 </div>;
+
+export { ReactComponent as ${exportedComponentName} }
         `;
       }
       const res = await transform(
