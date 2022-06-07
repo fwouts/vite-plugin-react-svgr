@@ -6,10 +6,10 @@ import type { Plugin } from "rollup";
 
 export function svgr({
   exportedComponentName,
-  alias,
+  alias = {},
 }: {
   exportedComponentName: string;
-  alias: Record<string, string>;
+  alias?: Record<string, string>;
 }): Plugin {
   return {
     name: "vite-plugin-react-svgr",
